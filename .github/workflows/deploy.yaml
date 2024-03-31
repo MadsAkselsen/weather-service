@@ -35,6 +35,12 @@ jobs:
       - name: List files
         run: ls -l ${{ github.workspace }}
 
+      - name: Debugging - Show app.env content
+        run: cat ${{ github.workspace }}/app.env
+      
+      - name: Debugging - Find files
+        run: find ${{ github.workspace }} -type f
+
       # Adjust this step to also transfer the app.env file
       - name: Transfer configuration to Droplet
         uses: appleboy/scp-action@master
