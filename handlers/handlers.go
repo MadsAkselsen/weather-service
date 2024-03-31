@@ -46,6 +46,7 @@ func (h *Handler) GetWeatherData(w http.ResponseWriter, r *http.Request) {
 		weatherData, err := fetchDataFromAPI(weatherApiUrl, map[string]string{"Content-Type": "application/json"})
 		if err != nil {
 			fmt.Println("Failed to fetch weather data:", err)
+			fmt.Println("API URL: ", weatherApiUrl)
 			http.Error(w, "Failed to fetch weather data", http.StatusInternalServerError)
 			return
 		}
@@ -55,6 +56,7 @@ func (h *Handler) GetWeatherData(w http.ResponseWriter, r *http.Request) {
 		forecastData, err := fetchDataFromAPI(forecastApiUrl, map[string]string{"Content-Type": "application/json"})
 		if err != nil {
 			fmt.Println("Failed to fetch forecast data:", err)
+			fmt.Println("API URL: ", weatherApiUrl)
 			http.Error(w, "Failed to fetch forecast data", http.StatusInternalServerError)
 			return
 		}
