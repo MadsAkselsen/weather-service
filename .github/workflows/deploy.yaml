@@ -38,21 +38,29 @@ jobs:
       - name: Debugging - Show app.env content
         run: cat ${{ github.workspace }}/app.env
       
-      - name: Debugging - Find files
-        run: find ${{ github.workspace }} -type f
+      - name: Debugging - List files for SCP
+        run: |
+          ls -l ./docker-compose.prod.yml
+          ls -l ./app.env
 
-      # Adjust this step to also transfer the app.env file
-      - name: Transfer configuration to Droplet
+      - name: Transfer docker-compose.prod.yml to Droplet
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: 2354
-          # Now transferring both docker-compose.prod.yml and app.env
-          source: |
-            ${{ github.workspace }}/docker-compose.prod.yml
-            ${{ github.workspace }}/app.env
+          source: "./docker-compose.prod.yml"
+          target: "~/weather-project/"
+      
+      - name: Transfer app.env to Droplet
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 2354
+          source: "./app.env"
           target: "~/weather-project/"
 
       - name: Deploy to Droplet
