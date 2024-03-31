@@ -32,6 +32,9 @@ jobs:
           echo "X_RAPID_API_KEY=${{ secrets.X_RAPID_API_KEY }}" >> app.env
           echo "WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}" >> app.env
 
+      - name: List files
+        run: ls -l ${{ github.workspace }}
+
       # Adjust this step to also transfer the app.env file
       - name: Transfer configuration to Droplet
         uses: appleboy/scp-action@master
