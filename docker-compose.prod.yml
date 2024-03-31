@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     ports:
       - "8080:8080"
+    env_file:
+      - app.env  # This file will be created on the fly in your GitHub Actions workflow
     environment:
       - REDIS_ADDR=redis:6379
       - OPEN_WEATHER_MAP_URL=https://api.openweathermap.org/data/2.5
