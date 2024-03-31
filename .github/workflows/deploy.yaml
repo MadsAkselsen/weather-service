@@ -45,8 +45,8 @@ jobs:
           port: 2354
           # Now transferring both docker-compose.prod.yml and app.env
           source: |
-            ./docker-compose.prod.yml
-            ./app.env
+            ${{ github.workspace }}/docker-compose.prod.yml
+            ${{ github.workspace }}/app.env
           target: "~/weather-project/"
 
       - name: Deploy to Droplet
