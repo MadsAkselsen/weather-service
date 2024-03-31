@@ -46,16 +46,6 @@ jobs:
             ./app.env
           target: "~/weather-project/"
 
-      - name: Transfer docker-compose.prod.yml to Droplet
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          port: 2354
-          source: "./docker-compose.prod.yml"
-          target: "~/weather-project/"
-
       - name: Deploy to Droplet
         uses: appleboy/ssh-action@master
         with:
